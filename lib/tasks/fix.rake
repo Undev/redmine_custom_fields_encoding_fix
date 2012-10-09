@@ -7,7 +7,7 @@ namespace :redmine do
       end
 
       Query.find_each do |q|
-        q.filters.each do |filter|
+        q.filters.each do |key, filter|
           filter[:values].each { |v| v.force_encoding('UTF-8') }
         end
 
