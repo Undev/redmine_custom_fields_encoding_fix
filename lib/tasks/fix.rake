@@ -6,7 +6,15 @@ namespace :redmine do
         c_f.save!
       end
 
-      puts "Fixed"
+      Query.find_each do |q|
+        q.filters.each do |filter|
+          filter[:values].each { |v| v.force_encoding('UTF-8') }
+        end
+
+        q.save!
+      end
+
+      puts "Fixed."
     end
   end
 end
