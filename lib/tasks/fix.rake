@@ -13,6 +13,14 @@ namespace :redmine do
 
         q.save!
       end
+      
+      Query.find_each do |q|
+        q.filters.each_value do |v|
+          v[:operator] = v[:operator].to_s
+        end
+
+        q.save!
+      end
     end
   end
 end
