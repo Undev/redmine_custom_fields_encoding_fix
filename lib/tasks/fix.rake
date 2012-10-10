@@ -4,7 +4,11 @@ namespace :redmine do
       Query.find_each do |q|
 
         q.filters.each do |key, filter|
-          filter[:values].each { |v| v.force_encoding('UTF-8') }
+          filter[:values].each do |value|
+            value.force_encoding("UTF-8")
+          end
+
+          q.filters[key] = filter.dup
         end
 
         q.save!
